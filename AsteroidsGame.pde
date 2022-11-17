@@ -28,7 +28,7 @@ public void keyPressed() {
   }
   
   if(key == 's') {
-    rocket.accelerate(-1);
+    rocket.accelerate(-2);
   }
   
   if(key == 'd') {
@@ -40,10 +40,6 @@ public void keyPressed() {
   }
   
   if(keyCode == SHIFT) {
-    rocket.accelerate(3);
-  }
-  
-  if(key == ' ') {
     rocket.hyperspace();
   }
 }
