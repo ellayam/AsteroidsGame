@@ -24,7 +24,7 @@ public void draw()
 
 public void keyPressed() {
   if(key == 'w') {
-    rocket.accelerate(3);
+    rocket.accelerate(4);
   }
   
   if(key == 's') {
