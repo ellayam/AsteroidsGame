@@ -38,11 +38,11 @@ public void draw()
 
 public void keyPressed() {
   if(key == 'w') {
-    rocket.accelerate(1.2);
+    rocket.accelerate(1.4);
   }
   
   if(key == 's') {
-    rocket.accelerate(-0.6);
+    rocket.accelerate(-0.7);
   }
   
   if(key == 'd') {
