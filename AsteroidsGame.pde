@@ -1,5 +1,6 @@
 Spaceship rocket;
 Star[] twinkle;
+ArrayList <Asteroid> asteroids;
 
 public void setup() 
 {
@@ -10,25 +11,38 @@ public void setup()
   for(int i = 0; i < twinkle.length; i++) {
     twinkle[i] = new Star();
   }
+  asteroids = new ArrayList <Asteroid>();
+  for(int i = 0; i < 15; i++) {
+    asteroids.add(new Asteroid());
+  }
 }
 
+int score = 0;
 public void draw() 
 {
   background(0);
   for(int i = 0; i < twinkle.length; i++) {
     twinkle[i].show();
   }
-  rocket.show();
+  for(int i = 0; i < asteroids.size(); i++) {
+    asteroids.get(i).move();
+    asteroids.get(i).show();
+    if(dist((int)rocket.getSpaceshipX(),(int)rocket.getSpaceshipY(),(int)asteroids.get(i).getAsteroidX(),(int)asteroids.get(i).getAsteroidY()) < 27) {
+      asteroids.remove(i);
+      score++;
+    }
+  }
   rocket.move();
+  rocket.show();
 }
 
 public void keyPressed() {
   if(key == 'w') {
-    rocket.accelerate(4);
+    rocket.accelerate(1.2);
   }
   
   if(key == 's') {
-    rocket.accelerate(-2);
+    rocket.accelerate(-0.6);
   }
   
   if(key == 'd') {
