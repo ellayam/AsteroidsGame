@@ -17,7 +17,6 @@ public void setup()
   }
 }
 
-int score = 0;
 public void draw() 
 {
   background(0);
@@ -29,7 +28,6 @@ public void draw()
     asteroids.get(i).show();
     if(dist((int)rocket.getSpaceshipX(),(int)rocket.getSpaceshipY(),(int)asteroids.get(i).getAsteroidX(),(int)asteroids.get(i).getAsteroidY()) < 27) {
       asteroids.remove(i);
-      score++;
     }
   }
   rocket.move();
