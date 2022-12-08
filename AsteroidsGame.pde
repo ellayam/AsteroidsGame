@@ -1,28 +1,31 @@
-Spaceship rocket;
-Star[] twinkle;
-ArrayList <Asteroid> asteroids;
+Spaceship rocket = new Spaceship();
+Star[] twinkle = new Star[200];
+ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
+ArrayList <Bullet> pew = new ArrayList <Bullet>();
+ArrayList <SmallAsteroid> broken = new ArrayList <SmallAsteroid>();
 
 public void setup() 
 {
   size(500,500);
   background(0);
-  rocket = new Spaceship();
-  twinkle = new Star[200];
+  
   for(int i = 0; i < twinkle.length; i++) {
     twinkle[i] = new Star();
   }
-  asteroids = new ArrayList <Asteroid>();
-  for(int i = 0; i < 15; i++) {
+  
+  for(int i = 0; i < 20; i++) {
     asteroids.add(new Asteroid());
   }
 }
 
+int score = 0;
 public void draw() 
 {
   background(0);
   for(int i = 0; i < twinkle.length; i++) {
     twinkle[i].show();
   }
+  
   for(int i = 0; i < asteroids.size(); i++) {
     asteroids.get(i).move();
     asteroids.get(i).show();
@@ -30,8 +33,40 @@ public void draw()
       asteroids.remove(i);
     }
   }
+  
+  for(int i = 0; i < pew.size(); i++) {
+    pew.get(i).move();
+    pew.get(i).show();
+    for(int j = 0; j < asteroids.size(); j++) {
+      if(dist((int)asteroids.get(j).getAsteroidX(),(int)asteroids.get(j).getAsteroidY(),(int)pew.get(i).getBulletX(),(int)pew.get(i).getBulletY()) < 20) {
+        score++;
+        for(int k = 0; k < 4; k++) {
+          broken.add(new SmallAsteroid(asteroids.get(j)));
+        }
+        asteroids.remove(j);
+        pew.remove(i);
+        break;
+      }
+    }
+  }
+  
+  for(int i = 0; i < broken.size(); i++) {
+    broken.get(i).move();
+    broken.get(i).show();
+  }
+  
   rocket.move();
   rocket.show();
+  
+  if(score > 9) {
+    fill(255);
+    textSize(60);
+    text("YOU WIN!",115,270);
+  }
+  
+  fill(255);
+  textSize(20);
+  text("Your Score: " + score,20,20,200,200);
 }
 
 public void keyPressed() {
@@ -53,5 +88,15 @@ public void keyPressed() {
   
   if(keyCode == SHIFT) {
     rocket.hyperspace();
+  }
+  
+  if(key == ' ') {
+    pew.add(new Bullet(rocket));
+  }
+  
+  if(key == '1') {
+    for(int i = 0; i < 8; i++) {
+      asteroids.add(new Asteroid());
+    }
   }
 }
