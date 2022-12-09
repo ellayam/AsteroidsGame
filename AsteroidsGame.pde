@@ -58,7 +58,7 @@ public void draw()
   rocket.move();
   rocket.show();
   
-  if(score > 9) {
+  if(score > 14) {
     fill(255);
     textSize(60);
     text("YOU WIN!",115,270);
